@@ -1,0 +1,64 @@
+Rtank  1.8
+Htank  1.2
+Zsplit  0.
+Npmt    3
+Npt_up  3
+PMT_X,Y,Z,Rsphere
+ 1.039   0.600  1.200   0.190 
+-1.039   0.600  1.200   0.190
+ 0.000  -1.200  1.200   0.190
+
+WaterAbsorptionLengthModulatedByWaveLength 100.
+AdditionnalUniformAbsorption               1e6
+ReflectivityFactorTop    .85
+ReflectivityFactorSide   .96
+ReflectivityFactorBottom .96
+CollectionEfficiency      .9
+SpecularFraction          .2
+RelativeWaterAbsortionLengthVsWavelength
+0.138054 0.171911 0.21003  0.256239 0.308537 0.37735  0.484984 0.659117 0.753154 0.842399 
+0.888049 0.94298  1.00022  0.993223 0.989593 0.928307 0.918782 0.819461 0.727707 0.578173 
+0.390255 0.300568 0.284079 0.256601 0.229324 0.205447 0.183962 0.12614  0.0299486 0  
+LinerReflectivityVsWavelength
+.7755 .8178 .8541 .8849 .9107 .9333 .9500 .9642 .9753 .9840
+.9903 .9948 .9976 .9993    1.    1. .9993 .9985 .9975 .9963 
+.9953 .9945 .9940 .9937 .9937 .9939 .9942 .9947 .9953 .9957
+QuantumEfficiencyVsWavelength
+.04  .09 .14 .17 .21 .22 .23 .24 .24 .24
+.23 .225 .22 .21 .20 .19 .18 .16 .15 .13
+.11  .10 .09 .08 .07 .06 .05 .04 .03 .02
+
+TimeUnit_ns     1.  
+NTimeUnit    20000
+TimeSlot        5
+Nslot          500
+
+FadcPerPhotoelectron  0.5
+SigmaPerPhotoelectron  0.4
+DynodeAnodeRatio      32.
+SigmaBaseline         .5
+---------------------------------------------------------------------------
+// option LSD 3+1 PMTs 
+Zsplit  .8
+Npmt    4
+Npt_up  3
+PMT_X,Y,Z,Rsphere
+ 1.039   0.600  1.350   0.190 
+-1.039   0.600  1.350   0.190
+ 0.000  -1.200  1.350   0.190
+ 0.000   0.000  0.950   0.190  
+--------------------------------------------------------------------------
+// option 120 Mhz
+TimeUnit_ns  1.041667  
+NTimeUnit    20000
+TimeSlot         8
+Nslot         2000
+--------------------------------------------------------------------------
+// Option standard tank 
+Zsplit  0. 
+Npmt    3
+Npt_up  3
+PMT_X,Y,Z,Rsphere
+ 1.039   0.600  1.350   0.190 
+-1.039   0.600  1.350   0.190
+ 0.000  -1.200  1.350   0.190

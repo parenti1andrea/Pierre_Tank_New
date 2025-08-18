@@ -1,0 +1,3 @@
+# To compile the code it's necessary to have the .cc and .h files in the same folder and do :
+
+g++ -o TankSimulation TankSimulation.cc

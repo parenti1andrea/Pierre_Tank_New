@@ -1,0 +1,38 @@
+InputFile             allpart_timezero_Ekin.dat
+SampleMode            SINGLE
+ArrayFile             regular_array
+TankProperties        /Users/workspace/Software/Pierre_Tank/New_Geometry/tank_properties_50cm
+OutputName            ./New_Geometry/output/top_50cm
+PrintTrace            0
+PrintSummary          1
+Noutput               5
+SampleNRepeat         1
+SampleRmin            300.
+SampleRmax            2100.
+SampleRthin           800.
+SampleDeltaR          .01
+SampleDeltaAzi        .015
+SampleEMWeightFactor  1.
+SampleMuWeightFactor  1.
+SampleTimeSpread      .15
+ArrayGeom             GROUND
+ArrayXavg             0.
+ArrayDX               750.
+ArrayYavg             0.
+ArrayDY               645.
+ArrayRavg             0.
+ArrayDR               0.
+END  
+----------------------------------------------------------
+SampleMode            SHOWER
+SampleMode            SINGLE
+SampleMode            SNGL_FIX
+InputFile             shower_corsika.part.dat
+InputFile             dat423228.part.dat
+InputFile             rndm_all_corsika
+InputFile             vert_mu
+InputFile             p_s_19_45_2
+OutputFile            vertmu_pe
+ArrayFile             regular_array
+ArrayGeom             GROUND
+
