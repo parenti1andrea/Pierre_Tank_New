@@ -5,8 +5,8 @@ each line contains the name of this quantity (not to be modified) followed by th
 the lines may be given in any order; they are read until the name is END (so the following lines are ignored)
 
 - InputFile: list of incoming particles
-    First line (primary): code,energy,theta,phi
-    then one line for each ground particles: code,E,x,y,cx,cy,t,weight
+    First line (primary): code,energy(not really used in the code),theta,phi
+    then one line for each ground particles: code, E(GeV) , x(m), y(m) ,cx,cy,t,weight
 - ArrayFile: name of the file describing the array (x,y coordinates of the tanks)
 - ArrayGeom: may be GROUND or SHOWER (in the latter case, the coordinates are define in the showerframe, with z along the shower axis) 
 - ArrayXavg...ArrayDR: define the position of theshower impact w.r.t. the array, with random variation if SampleNRepeat > 1)
@@ -832,7 +832,8 @@ int main(int argc, char *argv[])
   // Shower characteristics and shower frame
   if(!strcmp(SampleMode,"SHOWER")) {
     fscanf(input,"%d %lf %lf %lf",&ShowerPrimary,&ShowerEnergy,&ShowerTheta,&ShowerPhi);
-    printf("Shower  Primary %d  Energy %6.3f  Theta %6.2f  Phi %6.2f\n",ShowerPrimary,ShowerEnergy/1e18,ShowerTheta*180/M_PI,ShowerPhi*180/M_PI);
+    printf("Shower theta in rad %f\n",ShowerTheta);
+    printf("Shower  Primary %d  Energy %6.3f eV Theta %6.2f  Phi %6.2f\n",ShowerPrimary,ShowerEnergy,ShowerTheta*180/M_PI,ShowerPhi*180/M_PI);
     ShowerCosTh = cos(ShowerTheta); ShowerSinTh = sin(ShowerTheta);
     ShowerWX = ShowerSinTh*cos(ShowerPhi); ShowerWY = ShowerSinTh*sin(ShowerPhi); ShowerWZ = ShowerCosTh;
     BuildFrame(ShowerWX,ShowerWY,ShowerWZ,ShowerUX,ShowerUY,ShowerUZ,ShowerVX,ShowerVY,ShowerVZ);
@@ -900,8 +901,16 @@ int main(int argc, char *argv[])
       // sort the stations by increasing R if "GROUND" geometry
       //if(strcmp(ArrayGeom,"SHOWER")) std::sort(ArrayStation.begin(),ArrayStation.end(),sortByR);
       //printf("sorted\n");
-      for(unsigned int igp=0; igp<GrdPart.size(); igp++)
-        for(unsigned int is=0; is<ArrayStation.size(); is++) ArrayStation[is].Inject(GrdPart[igp]);
+
+      printf("\nInjecting %d particles",GrdPart.size());
+      printf(" onto %d detectors\n",ArrayStation.size());
+
+      for(unsigned int igp=0; igp<GrdPart.size(); igp++){
+        for(unsigned int is=0; is<ArrayStation.size(); is++){
+          ArrayStation[is].Inject(GrdPart[igp]);
+        }
+      }
+
       for(unsigned int is=0; is<ArrayStation.size(); is++) {
         Station *stat = &ArrayStation[is];
         stat->FollowParticles();
@@ -916,8 +925,8 @@ int main(int argc, char *argv[])
         for(int k=0; k<NPMT; k++) printf("%5d (%5d %5d) ",stat->Pmt[k].Npe_tot,stat->Pmt[k].Npe_em,stat->Pmt[k].Npe_mu);
         printf("  %7.2f %7.2f",stat->sem_rough,stat->smu_rough);
 #if PRINT_NPE
-        fprintf(output[3],"%6.1f %7.3f  ",stat->R,stat->Azi);
-        for(int k=0; k<NPMT; k++) fprintf(output[3],"%5d %5d ",stat->Pmt[k].Npe_em,stat->Pmt[k].Npe_mu);
+        fprintf(output[3],"%6.1f\t%7.3f",stat->R,stat->Azi);
+        for(int k=0; k<NPMT; k++) fprintf(output[3],"\t%5d\t%5d",stat->Pmt[k].Npe_em,stat->Pmt[k].Npe_mu);
         fprintf(output[3],"\n");
 #endif
 	// build FADC traces -------------------------------------------------------------
@@ -1014,7 +1023,9 @@ void ReadRequest(char* request_file)
       Noutput = atoi(value);
       if(Noutput>10) Noutput=10;
       for(int k=0; k<Noutput; k++) {
-        sprintf(name,"%s_%01.2f_%d",outname,FADC_PER_PE,k);
+        if(strcmp(SampleMode,"SHOWER")){
+          sprintf(name,"%s_%01.2f_%d",outname,FADC_PER_PE,k);}
+        else {sprintf(name,"%s_%d",outname,k);}
         output[k] = fopen(name,"w");
         printf("output file %s\n",name);
       }
@@ -1052,7 +1063,7 @@ void ReadGroundParticles()
     if(code==3) code = -2;
     if(code==5) code = 3;
     if(code==6) code = -3;
-    // keep only photons, e+-, mu+- between Rmin and Rmax or anywhere is not SHOWER sampling mode 
+    // keep only photons, e+-, mu+- between Rmin and Rmax or anywhere if not SHOWER sampling mode 
     if(abs(code)<4) {
       GroundParticle grdp(code,e,x,y,cx,cy,t,w);
       n++;

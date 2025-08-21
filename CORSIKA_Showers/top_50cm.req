@@ -1,0 +1,38 @@
+InputFile             /Users/workspace/Software/Pierre_Tank/CORSIKA_Showers/scripts/Fe_DAT601223.dat
+SampleMode            SHOWER
+ArrayFile             /Users/workspace/Software/Pierre_Tank/CORSIKA_Showers/PEPS_array_19_tanks
+TankProperties        /Users/workspace/Software/Pierre_Tank/CORSIKA_Showers/tank_properties_50cm
+OutputName            /Users/workspace/Software/Pierre_Tank/CORSIKA_Showers/output/PEPS_SHOWER
+PrintTrace            0
+PrintSummary          1
+Noutput               5
+SampleNRepeat         500
+SampleRmin            0.
+SampleRmax            1000.
+SampleRthin           800.
+SampleDeltaR          .01
+SampleDeltaAzi        .015
+SampleEMWeightFactor  1.
+SampleMuWeightFactor  1.
+SampleTimeSpread      .15
+ArrayGeom             GROUND
+ArrayXavg             0.
+ArrayDX               500.
+ArrayYavg             0.
+ArrayDY               500.
+ArrayRavg             0.
+ArrayDR               0.
+END  
+----------------------------------------------------------
+SampleMode            SHOWER
+SampleMode            SINGLE
+SampleMode            SNGL_FIX
+InputFile             shower_corsika.part.dat
+InputFile             dat423228.part.dat
+InputFile             rndm_all_corsika
+InputFile             vert_mu
+InputFile             p_s_19_45_2
+OutputFile            vertmu_pe
+ArrayFile             regular_array
+ArrayGeom             GROUND
+
