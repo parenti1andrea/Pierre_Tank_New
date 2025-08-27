@@ -1,6 +1,6 @@
-InputFile             /Users/workspace/Software/Pierre_Tank/CORSIKA_Showers/scripts/Fe_DAT601223.dat
+InputFile             /Users/workspace/Software/Pierre_Tank/CORSIKA_Showers/scripts/CorsikaReaderFiles/DAT010000_p.dat
 SampleMode            SHOWER
-ArrayFile             /Users/workspace/Software/Pierre_Tank/CORSIKA_Showers/PEPS_array_19_tanks
+ArrayFile             /Users/workspace/Software/Pierre_Tank/CORSIKA_Showers/PEPS_array_37_tanks
 TankProperties        /Users/workspace/Software/Pierre_Tank/CORSIKA_Showers/tank_properties_50cm
 OutputName            /Users/workspace/Software/Pierre_Tank/CORSIKA_Showers/output/PEPS_SHOWER
 PrintTrace            0
@@ -9,7 +9,7 @@ Noutput               5
 SampleNRepeat         500
 SampleRmin            0.
 SampleRmax            1000.
-SampleRthin           800.
+SampleRthin           50.
 SampleDeltaR          .01
 SampleDeltaAzi        .015
 SampleEMWeightFactor  1.

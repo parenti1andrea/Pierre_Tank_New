@@ -6,7 +6,7 @@ the lines may be given in any order; they are read until the name is END (so the
 
 - InputFile: list of incoming particles
     First line (primary): code,energy(not really used in the code),theta,phi
-    then one line for each ground particles: code, E(GeV) , x(m), y(m) ,cx,cy,t,weight
+    then one line for each ground particles: code, Ekin(GeV) , x(m), y(m) ,cx,cy,t,weight
 - ArrayFile: name of the file describing the array (x,y coordinates of the tanks)
 - ArrayGeom: may be GROUND or SHOWER (in the latter case, the coordinates are define in the showerframe, with z along the shower axis) 
 - ArrayXavg...ArrayDR: define the position of theshower impact w.r.t. the array, with random variation if SampleNRepeat > 1)
